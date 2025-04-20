@@ -4,6 +4,17 @@ local c = variants[cfg.variant]
 local utils = require("rasmus.utils")
 local M = {}
 
+local merge_tables = function(t1, t2)
+    local merged = {}
+    for k, v in pairs(t1) do
+        merged[k] = v
+    end
+    for k, v in pairs(t2) do
+        merged[k] = v -- this will override values from t1
+    end
+    return merged
+end
+
 local set_terminal_colors = function()
     vim.g.terminal_color_0 = c.black
     vim.g.terminal_color_1 = c.red
@@ -97,13 +108,13 @@ local set_groups = function()
         StorageClass = { fg = c.cyan },                                                                               -- static, register, volatile, etc.
         Structure = { fg = c.fg },                                                                                    -- struct, union, enum, etc.
         Constant = { fg = c.cyan },                                                                                   -- any constant
-        Comment = { fg = "#64b54a", bg = c.none, bold = cfg.comment_style.bold, italic = cfg.comment_style.italic },  -- italic comments
+        Comment = { fg = c.gray01, bg = c.none, bold = cfg.comment_style.bold, italic = cfg.comment_style.italic },   -- italic comments
         Conditional = { fg = c.blue, bg = c.none, bold = cfg.keyword_style.bold, italic = cfg.keyword_style.italic }, -- italic if, then, else, endif, switch, etc.
-        Keyword = { fg = "#d1cfcf", bg = c.none, bold = cfg.keyword_style.bold, italic = cfg.keyword_style.italic },  -- italic for, do, while, etc.
+        Keyword = { fg = c.blue, bg = c.none, bold = cfg.keyword_style.bold, italic = cfg.keyword_style.italic },     -- italic for, do, while, etc.
         Repeat = { fg = c.blue, bg = c.none, bold = cfg.keyword_style.bold, italic = cfg.keyword_style.italic },      -- italic any other keyword
         Boolean = { fg = c.cyan, bg = c.none, bold = cfg.boolean_style.bold, italic = cfg.boolean_style.italic },     -- true , false
         Function = { fg = c.blue, bg = c.none, bold = cfg.function_style.bold, italic = cfg.function_style.italic },
-        Identifier = { fg = c.blue, bg = c.none },                                                                    -- any variable name
+        Identifier = { fg = c.fg, bg = c.none },                                                                      -- any variable name
         String = { fg = c.cyan, bg = c.none },                                                                        -- Any string
         Character = { fg = c.cyan },                                                                                  -- any character constant: 'c', '\n'
         Number = { fg = c.cyan },                                                                                     -- a number constant: 5
@@ -449,6 +460,8 @@ local set_groups = function()
         jsonString = { fg = c.green },
         jsonKeyword = { fg = c.blue },
     }
+
+    groups = merge_tables(groups, cfg.custom_hl_groups)
 
     for group, parameters in pairs(groups) do
         utils.highlight(group, parameters)
