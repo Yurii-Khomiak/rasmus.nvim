@@ -26,6 +26,8 @@ M.config = {
     variable_style = style(opt("italic_variables", false), opt("bold_variables", false)),
     variant = opt("variant", "dark"),
     custom_hl_groups = opt("custom_hl_groups", {}),
+    set_custom_terminal_colors = opt("set_custom_terminal_colors", function() end),
+    hl_custom_groups = opt("hl_custom_groups", function() end),
 }
 
 return M

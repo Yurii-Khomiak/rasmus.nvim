@@ -34,6 +34,7 @@ local set_terminal_colors = function()
     vim.g.terminal_color_15 = c.bright_white
     vim.g.terminal_color_background = c.bg
     vim.g.terminal_color_foreground = c.fg
+    cfg.set_custom_terminal_colors()
 end
 
 local set_groups = function()
@@ -466,6 +467,8 @@ local set_groups = function()
     for group, parameters in pairs(groups) do
         utils.highlight(group, parameters)
     end
+
+    cfg.hl_custom_groups(utils)
 end
 
 M.colorscheme = function()
