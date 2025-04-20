@@ -99,7 +99,7 @@ local set_groups = function()
         Constant = { fg = c.cyan },                                                                                   -- any constant
         Comment = { fg = "#64b54a", bg = c.none, bold = cfg.comment_style.bold, italic = cfg.comment_style.italic },  -- italic comments
         Conditional = { fg = c.blue, bg = c.none, bold = cfg.keyword_style.bold, italic = cfg.keyword_style.italic }, -- italic if, then, else, endif, switch, etc.
-        Keyword = { fg = c.fg, bg = c.none, bold = cfg.keyword_style.bold, italic = cfg.keyword_style.italic },       -- italic for, do, while, etc.
+        Keyword = { fg = "#d1cfcf", bg = c.none, bold = cfg.keyword_style.bold, italic = cfg.keyword_style.italic },  -- italic for, do, while, etc.
         Repeat = { fg = c.blue, bg = c.none, bold = cfg.keyword_style.bold, italic = cfg.keyword_style.italic },      -- italic any other keyword
         Boolean = { fg = c.cyan, bg = c.none, bold = cfg.boolean_style.bold, italic = cfg.boolean_style.italic },     -- true , false
         Function = { fg = c.blue, bg = c.none, bold = cfg.function_style.bold, italic = cfg.function_style.italic },
